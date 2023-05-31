@@ -15,6 +15,13 @@ module.exports = {
       directory: "./db/migrations",
       tableName: "knex_migrations",
     },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.query('SET timezone="UTC";', (err) => {
+          done(err, conn);
+        });
+      },
+    },
   },
 
   staging: {

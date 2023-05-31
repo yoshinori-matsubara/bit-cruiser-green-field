@@ -8,6 +8,12 @@ const PORT = 8080;
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+});
+
 /**
  * @param {string} startDay - 計算開始日を入力
  * @param {string} endDay - 計算終了日を入力
@@ -32,20 +38,27 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
 
   for (let i = 0; i < db.length; i++) {
     // buyingDay時点での在庫数を計算
+    let date = new Date(db[i].registration_day);
+    date = new Date(date);
+    date.setDate(date.getDate() + 1);
     const stockOfBuyingDay =
       db[i].item_stock -
       calculateDiffInDays(
-        new Date(db[i].registration_day.toISOString().split("T")[0]),
+        date.toISOString().split("T")[0],
         req.params.buyingDay
       ) /
         db[i].consumption_day;
-
     // nextBuyingDay時点での在庫数を計算
     const stockOfNextBuyingDay =
       stockOfBuyingDay - diff / db[i].consumption_day;
 
+    console.log(date);
+    console.log(`${db[i].item_name},stockOfBuyingDay:${stockOfBuyingDay}`);
+    console.log(
+      `${db[i].item_name},stockOfNextBuyingDay:${stockOfNextBuyingDay}`
+    );
     // nextBuyingDay時点での在庫数が閾値以下ならリストに物品名と必要個数を追加
-    if (stockOfNextBuyingDay <= db[i].notification_stock) {
+    if (stockOfNextBuyingDay < db[i].notification_stock) {
       result.push({
         id: db[i].id,
         itemName: db[i].item_name,
@@ -53,7 +66,7 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
       });
     }
   }
-  res.status(200).send(result);
+  res.status(200).json(result);
 });
 
 // POST / フロントから送信された消耗品情報をitemsに追加
@@ -68,7 +81,7 @@ app.post("/api", async (req, res) => {
       registration_day: obj.registrationDay,
     });
     const result = await knex.select("*").from("items");
-    res.status(200).send(result);
+    res.status(200).json(result);
   } catch (e) {
     console.error("Error", e);
     res.status(500);
