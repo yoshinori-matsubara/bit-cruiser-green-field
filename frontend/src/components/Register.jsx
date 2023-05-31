@@ -15,16 +15,26 @@ export default function Register() {
   const registerItem = () => {
     const registrationDay = new Date();
     const method = "POST";
-    const body = { itemName, itemStock, consumptionDay, notificationStock, registrationDay };
-    // const headers = {
-    //   Accept: "application/json",
-    //   // "Content-Type": "application/json",
-    // };
-    fetch("/api", { method, body })
-      .then(res => {
-         if (res.status === 200) console.log(`${body}が登録できました！`);
+    const body = {
+      itemName,
+      itemStock,
+      consumptionDay,
+      notificationStock,
+      registrationDay,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    fetch("http://localhost:8080/api", {
+      method,
+      headers,
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        if (res.status === 200)
+          console.log(`${JSON.stringify(body)}が登録できました！`);
       })
-      .catch(res => console.error(`${body}が登録できませんでした！`));
+      .catch((res) => console.error(`${body}が登録できませんでした！`));
   };
 
   return (
