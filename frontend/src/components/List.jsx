@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export function List() {
   const [list, setList] = useState([]);
@@ -8,41 +8,42 @@ export function List() {
   // ステート更新関数
   const getNextBuyingDay = (e) => {
     const inputDate = e.currentTarget.value;
-    setNextBuyingDay(((inputDate) => inputDate)());
-    console.log(nextBuyingDay);
-    // if (buyingDay !== "") {
-    //   createList();
-    // }
+    setNextBuyingDay(inputDate);
   };
 
   // ステート更新関数
   const getBuyingDay = (e) => {
     const inputDate = e.currentTarget.value;
     setBuyingDay(inputDate);
-    console.log(buyingDay);
-    // if (nextBuyingDay !== "") {
-    //   createList();
-    // }
   };
 
   // 一覧作成
   const createList = async () => {
-    console.log("test");
+    // console.log("test");
+    // console.log(nextBuyingDay);
+    // console.log(buyingDay);
     const data = await fetch(
       `http://localhost:8080/api/${buyingDay}/${nextBuyingDay}`
-    );
-    console.log(data);
-    const newArray = data.map((obj) => {
-      // 暫定でこの形
-      return (
-        <li>
-          {obj.itemName}
-          {obj.quantity}
-        </li>
-      );
-    });
-    setList(newArray);
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        const newArray = res.map((obj) => {
+          // 暫定でこの形
+          return (
+            <li key={obj.id}>
+              {obj.itemName} : {obj.quantity}個
+            </li>
+          );
+        });
+        setList(newArray);
+      });
   };
+
+  useEffect(() => {
+    if (buyingDay !== "" && nextBuyingDay !== "") {
+      createList();
+    }
+  }, [buyingDay, nextBuyingDay]);
 
   return (
     <div>
