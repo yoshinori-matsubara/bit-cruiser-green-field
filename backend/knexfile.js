@@ -1,5 +1,8 @@
 // Update with your config settings.
 
+require("dotenv").config({
+  path: "./.env",
+})
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
@@ -8,8 +11,8 @@ module.exports = {
     client: "postgresql",
     connection: {
       database: "buying_list",
-      user: "user",
-      password: "password",
+      user: process.env.DB_USER,
+      // password: "password",
     },
     migrations: {
       directory: "./db/migrations",
