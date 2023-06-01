@@ -1,38 +1,193 @@
-.App {
-  text-align: center;
+body {
+  overflow: hidden;
+  font-size: 3vh;
+}
+.headerBrock {
+  width: 100%;
+  height: 7vh;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  position: fixed;
+  top: 0;
+  font-size: 3.5vh;
+}
+.footerBrock {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-end;
+  /* position: fixed; */
+  /* text-align: center; */
+  height: 100%;
+  bottom: 1vh;
+  position: fixed;
+  width: 100%;
+  z-index: -3;
+}
+.footer__button {
+  height: 7vh;
+  width: 7vh;
+  margin: 5vh;
+  cursor: pointer;
+}
+#list,
+#regist {
+  margin-top: 0;
+  margin-bottom: 3vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nextBrock {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: -35vh;
+  left: -12vh;
+}
+.listBrock {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 80%;
+  width: 100%;
+}
+.nextBuyBrock {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 10vh;
+  left: 4vh;
+}
+.choiceBuyBrock {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: -23vh;
+  z-index: -1;
+}
+.listParentBrock {
+  border: solid;
+  height: 50%;
+  width: 90%;
+  top: 33%;
+  display: block;
+  overflow: scroll;
+  position: fixed;
+  border-radius: 2vh;
+}
+.listDateBrock {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.dataBrock {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+.dataLi {
+  width: 100%;
+  white-space: nowrap;
+  text-align: left;
+  margin-left: 3vh;
+  font-size: 3vh;
+}
+.dataSpan {
+  width: 100%;
+  text-align: right;
+  margin-right: 3vh;
+  font-size: 3vh;
+}
+.registerBrock {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.itemAddBtn {
+  width: 7vh;
+  position: fixed;
+  bottom: 18vh;
+  left: 48%;
+  cursor: pointer;
+}
+.listEditParentBrock {
+  border: solid;
+  height: 62%;
+  width: 90%;
+  top: 12%;
+  display: block;
+  overflow: scroll;
+  position: fixed;
+  border-radius: 2vh;
+}
+.listEditBrock {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+}
+.data {
+  font-size: 3vh;
+  width: 100%;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid gray;
+  padding: 1vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.data > label,
+data > span {
+  width: 100%;
+  text-align: center;
+}
+@media (max-width: 376px) {
+  /* 600px以下の画面サイズに対するスタイル */
+  .itemAddBtn {
+    /* スタイルのプロパティと値 */
+    left: 45%;
   }
 }

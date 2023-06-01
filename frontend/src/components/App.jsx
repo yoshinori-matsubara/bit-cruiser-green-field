@@ -4,6 +4,7 @@ import { List } from "./List";
 import Register from "./Register";
 import Footer from "./Footer";
 import "./styles/App.css";
+import "./styles/modal.css";
 
 export function App() {
   const [state, setState] = useState("list");

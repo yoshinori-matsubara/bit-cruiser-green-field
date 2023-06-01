@@ -5,6 +5,9 @@ export function List() {
   const [buyingDay, setBuyingDay] = useState("");
   const [nextBuyingDay, setNextBuyingDay] = useState("");
 
+  useEffect(() => {
+    console.log(list);
+  }, [list]);
   // ステート更新関数
   const getNextBuyingDay = (e) => {
     const inputDate = e.currentTarget.value;
@@ -30,9 +33,12 @@ export function List() {
         const newArray = res.map((obj) => {
           // 暫定でこの形
           return (
-            <li key={obj.id}>
-              {obj.itemName} : {obj.quantity}個
-            </li>
+            <div className="dataBrock">
+              <li key={obj.id} className="dataLi">
+                {obj.itemName}
+              </li>
+              <span className="dataSpan">{obj.quantity}個</span>
+            </div>
           );
         });
         setList(newArray);
@@ -46,15 +52,26 @@ export function List() {
   }, [buyingDay, nextBuyingDay]);
 
   return (
-    <div>
-      <label>次回のお買い物日</label>
-      <input type="date" onChange={getNextBuyingDay}></input>
-      <br></br>
+    <div className="listBrock">
+      <div className="nextBuyBrock">
+        <label>直近の次のお買い物予定日</label>
+        <input type="date" onChange={getNextBuyingDay}></input>
+      </div>
 
-      <label>いつのお買物リスト？</label>
-      <input type="date" onChange={getBuyingDay}></input>
+      <div className="choiceBuyBrock">
+        <label>
+          <input
+            type="date"
+            onChange={getBuyingDay}
+            style={{ marginLeft: "1vh", marginRight: "1vh" }}
+          ></input>
+          の買い物リスト
+        </label>
+      </div>
       <br></br>
-      {list}
+      <div className="listParentBrock">
+        <div className="listDateBrock">{list}</div>
+      </div>
     </div>
   );
 }

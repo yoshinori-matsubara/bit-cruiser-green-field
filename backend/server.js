@@ -62,7 +62,7 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
       result.push({
         id: db[i].id,
         itemName: db[i].item_name,
-        quantity: db[i].notification_stock - stockOfNextBuyingDay,
+        quantity: Math.ceil(db[i].notification_stock - stockOfNextBuyingDay),
       });
     }
   }
