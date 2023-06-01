@@ -63,9 +63,7 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
         id: db[i].id,
         itemName: db[i].item_name,
         stockOfBuyingDay: Math.ceil(stockOfBuyingDay),
-        quantity: Math.ceil(
-          Math.ceil(db[i].notification_stock - stockOfNextBuyingDay)
-        ),
+        quantity: Math.ceil(db[i].notification_stock - stockOfNextBuyingDay),
       });
     }
   }
@@ -138,7 +136,7 @@ app.get("/allItems", async (req, res) => {
   res.send(result);
 });
 
-// PUT:
+// PUT:「購入しました」エンドポイント
 app.put("/purchaseItem", async (req, res) => {
   console.log(req.body);
   try {
@@ -149,6 +147,7 @@ app.put("/purchaseItem", async (req, res) => {
           .where({ id: id })
           .update({
             item_stock: stockOfBuyingDay + quantity,
+            registration_day: new Date(),
           });
       })
     );
