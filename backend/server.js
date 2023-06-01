@@ -47,7 +47,7 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
         date.toISOString().split("T")[0],
         req.params.buyingDay
       ) /
-      db[i].consumption_day;
+        db[i].consumption_day;
     // nextBuyingDay時点での在庫数を計算
     const stockOfNextBuyingDay =
       stockOfBuyingDay - diff / db[i].consumption_day;
@@ -62,10 +62,14 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
       result.push({
         id: db[i].id,
         itemName: db[i].item_name,
-        quantity: Math.ceil(db[i].notification_stock - stockOfNextBuyingDay),
+        stockOfBuyingDay: Math.ceil(stockOfBuyingDay),
+        quantity: Math.ceil(
+          Math.ceil(db[i].notification_stock - stockOfNextBuyingDay)
+        ),
       });
     }
   }
+  console.log(result);
   res.status(200).json(result);
 });
 
@@ -88,11 +92,8 @@ app.post("/api", async (req, res) => {
   }
 });
 
-
-
 // GET:
 app.get("/allItems", async (req, res) => {
-
   // 予想在庫量の計算
 
   const result = [];
@@ -104,28 +105,22 @@ app.get("/allItems", async (req, res) => {
     date.setDate(date.getDate() + 1);
     let stockOfBuyingtoDay =
       db[i].item_stock -
-      calculateDiffInDays(
-        date.toISOString().split("T")[0],
-        new Date()
-      ) /
-      db[i].consumption_day;
+      calculateDiffInDays(date.toISOString().split("T")[0], new Date()) /
+        db[i].consumption_day;
 
-    stockOfBuyingtoDay = Math.ceil(stockOfBuyingtoDay)
+    stockOfBuyingtoDay = Math.ceil(stockOfBuyingtoDay);
 
-    result.push(
-      {
-        id: db[i].id,
-        item_name: db[i].item_name,
-        item_stock: db[i].item_stock,
-        consumption_day: db[i].consumption_day,
-        notification_stock: db[i].notification_stock,
-        registration_day: db[i].registration_day,
-        expectedInventory: stockOfBuyingtoDay
-      }
-    )
-    console.log("stockOfBuyingtoDay", stockOfBuyingtoDay)
+    result.push({
+      id: db[i].id,
+      item_name: db[i].item_name,
+      item_stock: db[i].item_stock,
+      consumption_day: db[i].consumption_day,
+      notification_stock: db[i].notification_stock,
+      registration_day: db[i].registration_day,
+      expectedInventory: stockOfBuyingtoDay,
+    });
+    console.log("stockOfBuyingtoDay", stockOfBuyingtoDay);
   }
-
 
   // const allItems = await function () {
   //   return knex("items")
@@ -141,7 +136,29 @@ app.get("/allItems", async (req, res) => {
   // const result = await allItems()
 
   res.send(result);
-})
+});
+
+// PUT:
+app.put("/purchaseItem", async (req, res) => {
+  console.log(req.body);
+  try {
+    await Promise.all(
+      req.body.map(async (data) => {
+        const { id, itemName, stockOfBuyingDay, quantity } = data;
+        await knex("items")
+          .where({ id: id })
+          .update({
+            item_stock: stockOfBuyingDay + quantity,
+          });
+      })
+    );
+    console.log();
+    res.status(200).send("購入数を補充しました。");
+  } catch (e) {
+    console.error("Error", e);
+    res.status(500);
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`I am now waiting for incoming HTTP traffic on port ${PORT}!`);
