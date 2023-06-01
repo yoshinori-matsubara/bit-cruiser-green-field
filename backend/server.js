@@ -47,7 +47,7 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
         date.toISOString().split("T")[0],
         req.params.buyingDay
       ) /
-        db[i].consumption_day;
+      db[i].consumption_day;
     // nextBuyingDay時点での在庫数を計算
     const stockOfNextBuyingDay =
       stockOfBuyingDay - diff / db[i].consumption_day;
@@ -87,6 +87,61 @@ app.post("/api", async (req, res) => {
     res.status(500);
   }
 });
+
+
+
+// GET:
+app.get("/allItems", async (req, res) => {
+
+  // 予想在庫量の計算
+
+  const result = [];
+
+  const db = await knex.select("*").from("items");
+  for (let i = 0; i < db.length; i++) {
+    let date = new Date(db[i].registration_day);
+    date = new Date(date);
+    date.setDate(date.getDate() + 1);
+    let stockOfBuyingtoDay =
+      db[i].item_stock -
+      calculateDiffInDays(
+        date.toISOString().split("T")[0],
+        new Date()
+      ) /
+      db[i].consumption_day;
+
+    stockOfBuyingtoDay = Math.ceil(stockOfBuyingtoDay)
+
+    result.push(
+      {
+        id: db[i].id,
+        item_name: db[i].item_name,
+        item_stock: db[i].item_stock,
+        consumption_day: db[i].consumption_day,
+        notification_stock: db[i].notification_stock,
+        registration_day: db[i].registration_day,
+        expectedInventory: stockOfBuyingtoDay
+      }
+    )
+    console.log("stockOfBuyingtoDay", stockOfBuyingtoDay)
+  }
+
+
+  // const allItems = await function () {
+  //   return knex("items")
+  //     .select({
+  //       id: "id",
+  //       item_name: "item_name",
+  //       item_stock: "item_stock",
+  //       consumption_day: "consumption_day",
+  //       notification_stock: "notification_stock",
+  //       registration_day: "registration_day",
+  //     })
+  // }
+  // const result = await allItems()
+
+  res.send(result);
+})
 
 app.listen(PORT, () => {
   console.log(`I am now waiting for incoming HTTP traffic on port ${PORT}!`);
