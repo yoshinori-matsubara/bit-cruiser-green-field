@@ -8,7 +8,7 @@
     "start": "nodemon server.js",
     "migrate": "npx knex migrate:latest",
     "seed": "npx knex seed:run",
-    "build": "npm install && npx knex migrate:latest --knexfile db/migrations/knexfile.js"
+    "build": "npm install && npx knex migrate:latest --knexfile db/knexfile.js"
   },
   "author": "",
   "license": "ISC",
