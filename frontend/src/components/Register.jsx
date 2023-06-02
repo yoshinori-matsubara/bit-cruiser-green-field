@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "../Modal";
+import { AiFillDelete } from "react-icons/ai";
+
 import Delete from "./styles/Delete.svg";
 export default function Register(props) {
   const [allItem, setAllItem] = useState([]);
@@ -88,8 +90,7 @@ export default function Register(props) {
   return (
     <>
       <div className="registerBrock">
-        <img
-          src={Delete}
+        <AiFillDelete
           alt="Delete"
           className="DeleteBtn"
           onClick={() => {
@@ -102,22 +103,30 @@ export default function Register(props) {
               (el) =>
                 el.length !== 0 && (
                   <div className="data" key={el.id}>
-                    <label>
-                      名前: <span>{el.item_name}</span>
-                    </label>
-                    {/* <label>
-                      初期在庫: <span>{el.item_stock}</span>
-                    </label> */}
-                    <label>
-                      在庫:
-                      <input
-                        type="number"
-                        id={el.id}
-                        onBlur={addPutItem}
-                        defaultValue={el.expectedInventory}
-                        // value={el.expectedInventory}
-                      ></input>
-                    </label>
+                    <div className="dataViewBrock">
+                      <div className="dataView2Brock">
+                        <li>名前</li>
+                      </div>
+                      {/* </div> */}
+                      {/* <div className="dataViewBrock"> */}
+                      <div className="dataView3Brock">
+                        <span>{el.item_name}</span>
+                      </div>
+                    </div>
+                    <div className="dataViewBrock">
+                      <div className="dataView2Brock">
+                        <li>在庫</li>
+                      </div>
+                      {/* <div className="dataViewBrock"> */}
+                      <div className="dataView3Brock">
+                        <input
+                          type="number"
+                          id={el.id}
+                          onBlur={addPutItem}
+                          defaultValue={el.expectedInventory}
+                        ></input>
+                      </div>
+                    </div>
                   </div>
                 )
             )}
@@ -129,16 +138,14 @@ export default function Register(props) {
           URL={props.URL}
         />
         {putStock.length > 0 && (
-          <>
-            <button
-              className="setFixBtn"
-              onClick={() => {
-                setFix();
-              }}
-            >
-              修正完了
-            </button>
-          </>
+          <button
+            className="setFixBtn"
+            onClick={() => {
+              setFix();
+            }}
+          >
+            修正完了
+          </button>
         )}
       </div>
     </>

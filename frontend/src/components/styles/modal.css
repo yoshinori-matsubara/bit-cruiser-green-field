@@ -19,16 +19,81 @@ body {
 .addItemFrom {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  height: 82vh;
+  width: 77vh;
+  height: 53vh;
   align-content: center;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #e6dfcb;
   border-radius: 2vh;
   font-family: "Ubuntu", sans-serif;
 }
+.addItemsBrock {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-start;
+  position: fixed;
+  top: 38vh;
+  width: 58vh;
+}
+.addItems {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.addItemsBtn {
+  position: fixed;
+  bottom: 27vh;
+}
+.modalText {
+  margin: 1vh;
+  width: 100%;
+}
+.modalValue {
+  width: 78%;
+  padding: 8px 10px;
+  border: 1px solid #d2d2d2;
+  border-radius: 20px;
+  background: #f7f7f7;
+  color: #333;
+  text-align: center;
+}
 
-.addItemFrom > h2 {
+.modalValue::placeholder {
+  color: #999;
+}
+.valueBrock {
+  width: 80%;
+}
+.modalTextH {
   font-family: "Ubuntu", sans-serif;
+}
+@media (max-width: 376px) {
+  /* 600px以下の画面サイズに対するスタイル */
+  .modalTextH {
+    margin-top: 5vh;
+  }
+  .modalText {
+    /* スタイルのプロパティと値 */
+    font-size: 2vh;
+  }
+  .addItemFrom {
+    height: 55vh;
+    width: 52vh;
+  }
+  .addItemsBtn {
+    bottom: 30vh;
+  }
+  .addItemsBrock {
+    width: 45vh;
+  }
+  .modalValue {
+    height: 1vh;
+  }
 }

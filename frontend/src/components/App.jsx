@@ -9,8 +9,8 @@ import "./styles/modal.css";
 export function App() {
   const [state, setState] = useState("regist");
   const [modalVisible, setModalVisible] = useState(false);
-  // const URL ="https://bitcruiserapi.onrender.com"
-  const URL = "http://localhost:8080";
+  const URL = "https://bitcruiserapi.onrender.com";
+  // const URL = "http://localhost:8080";
   return (
     <div className="App">
       <Header className="App-header" />

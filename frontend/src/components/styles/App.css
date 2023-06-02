@@ -1,6 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+2&display=swap%27");
+
 body {
   overflow: hidden;
   font-size: 3vh;
+  background-color: #e6dfcb;
+  color: #567947;
+  font-family: "M PLUS 2", sans-serif;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20vh;
+  height: 5vh;
+  margin: 0 auto;
+  padding: 0.9em 2em;
+  border: 2px solid #e6dfcb;
+  border-radius: 5px;
+  box-shadow: 0 0 0 3px #f7998f;
+  background-color: #e02613;
+  color: #e6dfcb;
+  font-weight: 600;
+  font-size: 1em;
+  cursor: pointer;
+}
+button:hover {
+  border: 2px solid #e02613;
+  box-shadow: 0 0 0 3px #f7998f;
+  background-color: #e6dfcb;
+  color: #e02613;
 }
 
 .headerBrock {
@@ -12,11 +41,11 @@ body {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  background-color: gray;
   position: fixed;
   top: 0;
   font-size: 3.5vh;
-  background-color: #ced7dc;
+  background-color: #e02613;
+  color: #e6dfcb;
 }
 
 .footerBrock {
@@ -40,6 +69,9 @@ body {
   width: 7vh;
   margin: 5vh;
   cursor: pointer;
+}
+.footer__button:hover {
+  color: #e02613;
 }
 
 #list,
@@ -83,7 +115,6 @@ body {
   align-items: center;
   position: fixed;
   top: 10vh;
-  left: 4vh;
 }
 
 .choiceBuyBrock {
@@ -102,13 +133,14 @@ body {
 
 .listParentBrock {
   border: solid;
-  height: 50%;
-  width: 90%;
+  height: 45vh;
+  width: 60vh;
   top: 29%;
   display: block;
   overflow: scroll;
   position: fixed;
   border-radius: 2vh;
+  padding: 2vh;
 }
 
 .listDateBrock {
@@ -156,16 +188,20 @@ body {
 
 .itemAddBtn {
   width: 7vh;
+  height: 7vh;
   position: fixed;
   bottom: 18vh;
   left: 48%;
   cursor: pointer;
 }
+.itemAddBtn:hover {
+  color: #e02613;
+}
 
 .listEditParentBrock {
   border: solid;
   height: 62%;
-  width: 90%;
+  width: 65vh;
   top: 12%;
   display: block;
   overflow: scroll;
@@ -181,7 +217,7 @@ body {
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .data {
@@ -192,8 +228,8 @@ body {
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid gray;
+  align-items: flex-start;
+  border-bottom: 1px solid;
   padding: 1vh;
 }
 
@@ -212,26 +248,123 @@ body {
   position: fixed;
   top: 81vh;
   font-size: 2.5vh;
+  width: 24vh;
 }
+
 .setFixBtn {
   position: fixed;
-  bottom: 19vh;
-  right: 8vh;
+  bottom: 18vh;
+  left: 55%;
   cursor: pointer;
   z-index: -1;
+  width: 25vh;
 }
 .DeleteBtn {
   width: 5vh;
-  z-index: 3;
+  height: 5vh;
+  z-index: 0;
   position: fixed;
   top: 1vh;
   right: 2vh;
   cursor: pointer;
+  color: #e6dfcb;
+}
+.DeleteBtn:hover {
+  color: #567947;
+}
+
+.dataViewBrock {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.dataView2Brock {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.dataView2Brock > li {
+  width: 20vh;
+  text-align: center;
+  /* margin-left: 20vh; */
+}
+.dataView3Brock {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  /* position: fixed; */
+  right: -10vh;
+}
+.dataView3Brock > span {
+  margin-left: -1vh;
+  width: 15vh;
+  /* text-align: center; */
+}
+.dataView3Brock > input {
+  width: 13vh;
+  padding: 8px 10px;
+  border: 1px solid #d2d2d2;
+  border-radius: 20px;
+  background: #f7f7f7;
+  color: #333;
+  text-align: center;
+  font-size: 3vh;
+  height: 2vh;
+  margin-left: -1vh;
 }
 @media (max-width: 376px) {
   /* 600px以下の画面サイズに対するスタイル */
   .itemAddBtn {
     /* スタイルのプロパティと値 */
     left: 45%;
+  }
+  .listParentBrock {
+    width: 41vh;
+  }
+  .dataView3Brock {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    /* position: fixed; */
+    right: 0vh;
+  }
+  .listEditParentBrock {
+    border: solid;
+    height: 62%;
+    width: 50vh;
+    top: 12%;
+    display: block;
+    overflow: scroll;
+    position: fixed;
+    border-radius: 2vh;
+  }
+  .setFixBtn {
+    font-size: 2vh;
+    position: fixed;
+    bottom: 19vh;
+    /* right: -11vh; */
+    cursor: pointer;
+    z-index: -1;
+    width: 17vh;
+    left: 35vh;
+  }
+  dataView3Brock > span {
+    margin-left: -1vh;
+    width: 15vh;
   }
 }

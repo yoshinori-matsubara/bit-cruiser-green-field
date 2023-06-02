@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import addBtn from "./components/styles/add.svg";
+// import addBtn from "./components/styles/add.svg";
+import { AiFillPlusSquare } from "react-icons/ai";
 export function Modal(props) {
   // model関連
 
@@ -65,34 +66,64 @@ export function Modal(props) {
 
   return (
     <div>
-      <img
-        src={addBtn}
+      <AiFillPlusSquare
         onClick={openModal}
         alt="addBtn"
         className="itemAddBtn"
-      ></img>
+      ></AiFillPlusSquare>
 
       {props.modalVisible && (
         <div id="modalArea" className="modalArea" onClick={closeModal}>
           {/* Modal Content */}
           <div className="addItemFrom" onClick={stopPropagation}>
-            <h2>消耗品の在庫登録</h2>
-            <label>品名</label>
-            <input type="text" onBlur={getItemName} required></input>
-            <br></br>
-            <label>在庫量</label>
-            <input type="number" onBlur={getItemStock} required></input>
-            <br></br>
-            <label>何日で１個使うか？</label>
-            <input type="number" onBlur={getConsumptionDay} required></input>
-            <br></br>
-            <label>下回りたくない</label>
-            <input type="number" onBlur={getNotificationStock} required></input>
-            <br></br>
+            <h2 className="modalTextH">商品の在庫登録</h2>
+            <div className="addItemsBrock">
+              <div className="addItems">
+                <label className="modalText">品名</label>
+                <div className="valueBrock">
+                  <input
+                    className="modalValue"
+                    type="text"
+                    onBlur={getItemName}
+                  ></input>
+                </div>
+              </div>
+              <div className="addItems">
+                <label className="modalText">在庫量</label>
+                <div className="valueBrock">
+                  <input
+                    className="modalValue"
+                    type="number"
+                    onBlur={getItemStock}
+                  ></input>
+                </div>
+              </div>
+              <div className="addItems">
+                <label className="modalText">何日で１個使うか？</label>
+                <div className="valueBrock">
+                  <input
+                    className="modalValue"
+                    type="number"
+                    onBlur={getConsumptionDay}
+                  ></input>
+                </div>
+              </div>
+              <div className="addItems">
+                <label className="modalText">下回りたくない</label>
+                <div className="valueBrock">
+                  <input
+                    className="modalValue"
+                    type="number"
+                    onBlur={getNotificationStock}
+                  ></input>
+                </div>
+              </div>
+            </div>
             <button
               onClick={() => {
                 registerItem(closeModal);
               }}
+              className="addItemsBtn"
             >
               登録
             </button>
