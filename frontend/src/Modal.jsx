@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import addBtn from "./components/styles/add.svg";
-export function Modal() {
+export function Modal(props) {
   // model関連
-  const [modalVisible, setModalVisible] = useState(false);
 
   const openModal = () => {
-    setModalVisible(true);
+    props.setModalVisible(true);
   };
 
   const closeModal = () => {
-    setModalVisible(false);
+    props.setModalVisible(false);
   };
 
   const stopPropagation = (e) => {
@@ -27,7 +26,7 @@ export function Modal() {
   const getNotificationStock = (e) =>
     setNotificationStock(e.currentTarget.value);
 
-  const registerItem = () => {
+  const registerItem = async (func) => {
     const registrationDay = new Date();
     const method = "POST";
     const body = {
@@ -40,7 +39,7 @@ export function Modal() {
     const headers = {
       "Content-Type": "application/json",
     };
-    fetch("http://localhost:8080/api", {
+    await fetch("http://localhost:8080/api", {
       method,
       headers,
       body: JSON.stringify(body),
@@ -48,6 +47,7 @@ export function Modal() {
       .then((res) => {
         if (res.status === 200)
           console.log(`${JSON.stringify(body)}が登録できました！`);
+        func();
       })
       .catch((res) => console.error(`${body}が登録できませんでした！`));
   };
@@ -61,7 +61,7 @@ export function Modal() {
         className="itemAddBtn"
       ></img>
 
-      {modalVisible && (
+      {props.modalVisible && (
         <div id="modalArea" className="modalArea" onClick={closeModal}>
           {/* Modal Content */}
           <div className="addItemFrom" onClick={stopPropagation}>
@@ -80,8 +80,7 @@ export function Modal() {
             <br></br>
             <button
               onClick={() => {
-                registerItem();
-                closeModal();
+                registerItem(closeModal);
               }}
             >
               登録

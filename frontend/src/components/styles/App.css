@@ -197,11 +197,14 @@ body {
 }
 
 .data > label,
-data > span,
-data > input {
+.data > label > span,
+.data > label > input {
   width: 100%;
   text-align: center;
   font-size: 3vh;
+}
+.data > label > input {
+  width: 15vh;
 }
 
 .buyBtn {
@@ -209,7 +212,21 @@ data > input {
   top: 81vh;
   font-size: 2.5vh;
 }
-
+.setFixBtn {
+  position: fixed;
+  bottom: 19vh;
+  right: 8vh;
+  cursor: pointer;
+  z-index: -1;
+}
+.DeleteBtn {
+  width: 5vh;
+  z-index: 3;
+  position: fixed;
+  top: 1vh;
+  right: 2vh;
+  cursor: pointer;
+}
 @media (max-width: 376px) {
   /* 600px以下の画面サイズに対するスタイル */
   .itemAddBtn {
