@@ -1,11 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
-
-
 body {
   overflow: hidden;
   font-size: 3vh;
-  font-family: 'Ubuntu', sans-serif;
-  background-color: #e6e5ef;
 }
 
 .headerBrock {
@@ -89,7 +84,6 @@ body {
   position: fixed;
   top: 10vh;
   left: 4vh;
-  font-family: 'Ubuntu', sans-serif;
 }
 
 .choiceBuyBrock {
@@ -202,10 +196,12 @@ body {
   padding: 1vh;
 }
 
-.data>label,
-data>span {
+.data > label,
+data > span,
+data > input {
   width: 100%;
   text-align: center;
+  font-size: 3vh;
 }
 
 .buyBtn {
@@ -215,7 +211,6 @@ data>span {
 }
 
 @media (max-width: 376px) {
-
   /* 600px以下の画面サイズに対するスタイル */
   .itemAddBtn {
     /* スタイルのプロパティと値 */

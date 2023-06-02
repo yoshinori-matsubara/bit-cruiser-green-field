@@ -3,7 +3,7 @@ import { Modal } from "../Modal";
 
 export default function Register() {
   const [allItem, setAllItem] = useState([]);
-
+  const [putStock, setPutStock] = useState([]);
   const registerAllItem = async () => {
     try {
       const data = await fetch("http://localhost:8080/allItems");
@@ -21,6 +21,13 @@ export default function Register() {
     console.log(allItem);
   }, [allItem]);
 
+  const addPutItem = (e) => {
+    setPutStock((prevState) => [
+      ...prevState,
+      { id: e.target.id, item_stock: e.target.value },
+    ]);
+  };
+
   return (
     <>
       <div className="registerBrock">
@@ -29,7 +36,7 @@ export default function Register() {
             {allItem.map(
               (el) =>
                 el.length !== 0 && (
-                  <div className="data" key={el.id} id={el.id}>
+                  <div className="data" key={el.id}>
                     <label>
                       名前: <span>{el.item_name}</span>
                     </label>
@@ -37,7 +44,13 @@ export default function Register() {
                       初期在庫: <span>{el.item_stock}</span>
                     </label> */}
                     <label>
-                      本日時点の予測在庫量:<span>{el.expectedInventory}</span>{" "}
+                      予測在庫:
+                      <input
+                        type="text"
+                        id={el.id}
+                        onChange={addPutItem}
+                        value={el.expectedInventory}
+                      ></input>
                     </label>
                   </div>
                 )

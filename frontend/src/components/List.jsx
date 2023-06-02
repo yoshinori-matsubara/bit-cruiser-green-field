@@ -35,7 +35,7 @@ export function List() {
         const newArray = res.map((obj) => {
           // 暫定でこの形
           return (
-            <div className="dataBrock">
+            <div className="dataBrock" key={obj.id}>
               <li key={obj.id} className="dataLi">
                 {obj.itemName}
               </li>

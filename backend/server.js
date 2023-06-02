@@ -128,11 +128,11 @@ app.get("/allItems", async (req, res) => {
 // [
 //     {
 //     "id": 2,
-//     "iitem_stock": 3
+//     "item_stock": 3
 //   },
 //     {
 //     "id": 3,
-//     "iitem_stock": 4
+//     "item_stock": 4
 //   }
 // ]
 app.put("/changeItemStocks", async (req, res) => {

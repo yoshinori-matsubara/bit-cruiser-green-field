@@ -78,7 +78,14 @@ export function Modal() {
             <label>下回りたくない</label>
             <input type="number" onBlur={getNotificationStock}></input>
             <br></br>
-            <button onClick={(registerItem, closeModal)}>登録</button>
+            <button
+              onClick={() => {
+                registerItem();
+                closeModal();
+              }}
+            >
+              登録
+            </button>
           </div>
         </div>
       )}
