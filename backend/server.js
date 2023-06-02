@@ -11,8 +11,8 @@ app.use(express.json());
 const allowed_origins = [
   "https://bitcruiser.onrender.com", "http://localhost:3000"
 ];
-const origin = req.headers.Origin;
 app.use((req, res, next) => {
+  const origin = req.headers.Origin;
   if (allowed_origins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
