@@ -33,11 +33,11 @@ export default function Register() {
                     <label>
                       名前: <span>{el.item_name}</span>
                     </label>
-                    <label>
+                    {/* <label>
                       初期在庫: <span>{el.item_stock}</span>
-                    </label>
+                    </label> */}
                     <label>
-                      予測在庫:<span>{el.expectedInventory}</span>{" "}
+                      本日時点の予測在庫量:<span>{el.expectedInventory}</span>{" "}
                     </label>
                   </div>
                 )

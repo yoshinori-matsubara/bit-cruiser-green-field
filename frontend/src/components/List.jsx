@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export function List() {
   const [list, setList] = useState([]);
+  const [putData, setPutData] = useState([]);
   const [buyingDay, setBuyingDay] = useState("");
   const [nextBuyingDay, setNextBuyingDay] = useState("");
 
@@ -30,6 +31,7 @@ export function List() {
     )
       .then((res) => res.json())
       .then((res) => {
+        setPutData(res);
         const newArray = res.map((obj) => {
           // 暫定でこの形
           return (
@@ -50,6 +52,24 @@ export function List() {
       createList();
     }
   }, [buyingDay, nextBuyingDay]);
+
+  const putBuyData = async () => {
+    try {
+      const data = await fetch("http://localhost:8080/purchaseItem", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(putData),
+      });
+      const result = await data.text();
+      if (result) {
+        console.log(result);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="listBrock">
@@ -72,6 +92,13 @@ export function List() {
       <div className="listParentBrock">
         <div className="listDateBrock">{list}</div>
       </div>
+      {list.length > 0 && (
+        <>
+          <button className="buyBtn" onClick={putBuyData}>
+            購入した！
+          </button>
+        </>
+      )}
     </div>
   );
 }
