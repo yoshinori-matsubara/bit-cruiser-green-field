@@ -112,7 +112,7 @@ export default function Register(props) {
                       初期在庫: <span>{el.item_stock}</span>
                     </label> */}
                     <label>
-                      予測在庫:
+                      在庫:
                       <input
                         type="number"
                         id={el.id}
