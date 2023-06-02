@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
 .modalArea {
   display: flex;
   justify-content: center;
@@ -9,6 +16,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 .addItemFrom {
   display: flex;
   flex-direction: column;
@@ -19,4 +27,10 @@
   align-items: center;
   background-color: #ffffff;
   border-radius: 2vh;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.addItemFrom h2 {
+
+  font-family: 'Ubuntu', sans-serif;
 }
