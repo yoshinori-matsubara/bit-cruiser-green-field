@@ -8,17 +8,12 @@ const PORT = 8080;
 
 app.use(express.json());
 
-const allowed_origins = [
-  "https://bitcruiser.onrender.com", "http://localhost:3000"
-];
 app.use((req, res, next) => {
-  const origin = req.headers.Origin;
-  if (allowed_origins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
-    res.setHeader("Access-Control-Allow-Headers", "*");
-    next();
-  }
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  // res.setHeader("Access-Control-Allow-Origin", "https://bitcruiserapi.onrender.com");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  next();
 });
 
 /**

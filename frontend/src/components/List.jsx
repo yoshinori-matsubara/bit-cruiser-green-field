@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export function List() {
+export function List(props) {
   const [list, setList] = useState([]);
   const [putData, setPutData] = useState([]);
   const [buyingDay, setBuyingDay] = useState("");
@@ -26,9 +26,7 @@ export function List() {
     // console.log("test");
     // console.log(nextBuyingDay);
     // console.log(buyingDay);
-    const data = await fetch(
-      `https://bitcruiserapi.onrender.com/api/${buyingDay}/${nextBuyingDay}`
-    )
+    const data = await fetch(`${props.URL}/api/${buyingDay}/${nextBuyingDay}`)
       .then((res) => res.json())
       .then((res) => {
         setPutData(res);
@@ -55,16 +53,13 @@ export function List() {
 
   const putBuyData = async () => {
     try {
-      const data = await fetch(
-        "https://bitcruiserapi.onrender.com/purchaseItem",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(putData),
-        }
-      );
+      const data = await fetch(props.URL + "/purchaseItem", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(putData),
+      });
       const result = await data.text();
       if (result) {
         console.log(result);
@@ -77,7 +72,7 @@ export function List() {
   return (
     <div className="listBrock">
       <div className="nextBuyBrock">
-        <label>直近の次のお買い物予定日</label>
+        <label>次のお買い物予定日</label>
         <input type="date" onChange={getNextBuyingDay}></input>
       </div>
 

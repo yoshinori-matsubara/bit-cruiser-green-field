@@ -7,7 +7,7 @@ export default function Register(props) {
 
   const registerAllItem = async () => {
     try {
-      const data = await fetch("https://bitcruiserapi.onrender.com/allItems");
+      const data = await fetch(props.URL + "/allItems");
       const jsonData = await data.json();
       setAllItem(jsonData);
     } catch (error) {
@@ -47,16 +47,13 @@ export default function Register(props) {
 
   const setFix = async () => {
     try {
-      const data = await fetch(
-        "https://bitcruiserapi.onrender.com/changeItemStocks",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(putStock),
-        }
-      );
+      const data = await fetch(props.URL + "/changeItemStocks", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(putStock),
+      });
       const result = await data.text();
       if (result) {
         console.log(result);
@@ -71,7 +68,7 @@ export default function Register(props) {
     const ans = window.confirm("バルスの呪文を唱えますか？");
     if (ans === true) {
       try {
-        const data = await fetch("https://bitcruiserapi.onrender.com/delete", {
+        const data = await fetch(props.URL + "/delete", {
           method: "DELETE",
         });
         const result = await data.text();
@@ -129,6 +126,7 @@ export default function Register(props) {
         <Modal
           modalVisible={props.modalVisible}
           setModalVisible={props.setModalVisible}
+          URL={props.URL}
         />
         {putStock.length > 0 && (
           <>
