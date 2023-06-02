@@ -7,7 +7,7 @@ import "./styles/App.css";
 import "./styles/modal.css";
 
 export function App() {
-  const [state, setState] = useState("list");
+  const [state, setState] = useState("regist");
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
