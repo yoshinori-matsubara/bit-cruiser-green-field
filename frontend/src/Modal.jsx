@@ -39,7 +39,7 @@ export function Modal(props) {
     const headers = {
       "Content-Type": "application/json",
     };
-    await fetch("http://localhost:8080/api", {
+    await fetch("https://bitcruiserapi.onrender.com/api", {
       method,
       headers,
       body: JSON.stringify(body),

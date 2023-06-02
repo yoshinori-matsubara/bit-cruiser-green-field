@@ -7,7 +7,7 @@ export default function Register(props) {
 
   const registerAllItem = async () => {
     try {
-      const data = await fetch("http://localhost:8080/allItems");
+      const data = await fetch("https://bitcruiserapi.onrender.com/allItems");
       const jsonData = await data.json();
       setAllItem(jsonData);
     } catch (error) {
@@ -47,13 +47,16 @@ export default function Register(props) {
 
   const setFix = async () => {
     try {
-      const data = await fetch("http://localhost:8080/changeItemStocks", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(putStock),
-      });
+      const data = await fetch(
+        "https://bitcruiserapi.onrender.com/changeItemStocks",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(putStock),
+        }
+      );
       const result = await data.text();
       if (result) {
         console.log(result);
@@ -68,7 +71,7 @@ export default function Register(props) {
     const ans = window.confirm("バルスの呪文を唱えますか？");
     if (ans === true) {
       try {
-        const data = await fetch("http://localhost:8080/delete", {
+        const data = await fetch("https://bitcruiserapi.onrender.com/delete", {
           method: "DELETE",
         });
         const result = await data.text();

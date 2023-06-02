@@ -27,7 +27,7 @@ export function List() {
     // console.log(nextBuyingDay);
     // console.log(buyingDay);
     const data = await fetch(
-      `http://localhost:8080/api/${buyingDay}/${nextBuyingDay}`
+      `https://bitcruiserapi.onrender.com/api/${buyingDay}/${nextBuyingDay}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -55,13 +55,16 @@ export function List() {
 
   const putBuyData = async () => {
     try {
-      const data = await fetch("http://localhost:8080/purchaseItem", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(putData),
-      });
+      const data = await fetch(
+        "https://bitcruiserapi.onrender.com/purchaseItem",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(putData),
+        }
+      );
       const result = await data.text();
       if (result) {
         console.log(result);
