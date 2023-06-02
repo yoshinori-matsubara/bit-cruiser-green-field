@@ -47,7 +47,7 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
         date.toISOString().split("T")[0],
         req.params.buyingDay
       ) /
-      db[i].consumption_day;
+        db[i].consumption_day;
     // nextBuyingDay時点での在庫数を計算
     const stockOfNextBuyingDay =
       stockOfBuyingDay - diff / db[i].consumption_day;
@@ -90,8 +90,6 @@ app.post("/api", async (req, res) => {
   }
 });
 
-
-
 // GET:在庫一覧（現在の予想在庫量含む）の取得
 app.get("/allItems", async (req, res) => {
   // 予想在庫量の計算
@@ -106,7 +104,7 @@ app.get("/allItems", async (req, res) => {
     let stockOfBuyingtoDay =
       db[i].item_stock -
       calculateDiffInDays(date.toISOString().split("T")[0], new Date()) /
-      db[i].consumption_day;
+        db[i].consumption_day;
 
     stockOfBuyingtoDay = Math.ceil(stockOfBuyingtoDay);
 
@@ -122,8 +120,7 @@ app.get("/allItems", async (req, res) => {
     console.log("stockOfBuyingtoDay", stockOfBuyingtoDay);
   }
   res.send(result);
-})
-
+});
 
 // PUT: 現在の正在庫数を受け取り、在庫数と登録日を更新する
 // 想定req
@@ -140,13 +137,36 @@ app.get("/allItems", async (req, res) => {
 app.put("/changeItemStocks", async (req, res) => {
   req.body.map(async (data) => {
     const { id, item_stock } = data;
-    const today = new Date()
-    await knex("items").where({ id: id }).update({ item_stock: item_stock, registration_day: today });
+    const today = new Date();
+    await knex("items")
+      .where({ id: id })
+      .update({ item_stock: item_stock, registration_day: today });
   });
   console.log("在庫量登録リクエストデータ", req.body);
   res.send("在庫量と登録日更新完了");
 });
-
+// PUT:「購入しました」エンドポイント
+app.put("/purchaseItem", async (req, res) => {
+  console.log(req.body);
+  try {
+    await Promise.all(
+      req.body.map(async (data) => {
+        const { id, itemName, stockOfBuyingDay, quantity } = data;
+        await knex("items")
+          .where({ id: id })
+          .update({
+            item_stock: stockOfBuyingDay + quantity,
+            registration_day: new Date(),
+          });
+      })
+    );
+    console.log();
+    res.status(200).send("購入数を補充しました!");
+  } catch (e) {
+    console.error("Error", e);
+    res.status(500);
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`I am now waiting for incoming HTTP traffic on port ${PORT}!`);
