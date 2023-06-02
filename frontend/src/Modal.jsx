@@ -27,6 +27,15 @@ export function Modal(props) {
     setNotificationStock(e.currentTarget.value);
 
   const registerItem = async (func) => {
+    if (
+      itemName === "" ||
+      itemStock <= 0 ||
+      consumptionDay <= 0 ||
+      notificationStock <= 0
+    ) {
+      window.alert("入力が不正です。");
+      return console.error("入力した値が不正又は未入力のため処理を停止");
+    }
     const registrationDay = new Date();
     const method = "POST";
     const body = {
@@ -36,6 +45,7 @@ export function Modal(props) {
       notificationStock,
       registrationDay,
     };
+    console.log(body);
     const headers = {
       "Content-Type": "application/json",
     };
@@ -68,16 +78,16 @@ export function Modal(props) {
           <div className="addItemFrom" onClick={stopPropagation}>
             <h2>消耗品の在庫登録</h2>
             <label>品名</label>
-            <input type="text" onBlur={getItemName}></input>
+            <input type="text" onBlur={getItemName} required></input>
             <br></br>
             <label>在庫量</label>
-            <input type="number" onBlur={getItemStock}></input>
+            <input type="number" onBlur={getItemStock} required></input>
             <br></br>
             <label>何日で１個使うか？</label>
-            <input type="number" onBlur={getConsumptionDay}></input>
+            <input type="number" onBlur={getConsumptionDay} required></input>
             <br></br>
             <label>下回りたくない</label>
-            <input type="number" onBlur={getNotificationStock}></input>
+            <input type="number" onBlur={getNotificationStock} required></input>
             <br></br>
             <button
               onClick={() => {
