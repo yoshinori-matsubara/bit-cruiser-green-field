@@ -1,3 +1,3 @@
 export default function Header() {
-  return <div className="headerBrock">SmugShopping!</div>;
+  return <div className="headerBrock">Smug Shopping!</div>;
 }
