@@ -47,7 +47,7 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
         date.toISOString().split("T")[0],
         req.params.buyingDay
       ) /
-        db[i].consumption_day;
+      db[i].consumption_day;
     // nextBuyingDay時点での在庫数を計算
     const stockOfNextBuyingDay =
       stockOfBuyingDay - diff / db[i].consumption_day;
@@ -104,7 +104,7 @@ app.get("/allItems", async (req, res) => {
     let stockOfBuyingtoDay =
       db[i].item_stock -
       calculateDiffInDays(date.toISOString().split("T")[0], new Date()) /
-        db[i].consumption_day;
+      db[i].consumption_day;
 
     stockOfBuyingtoDay = Math.ceil(stockOfBuyingtoDay);
 
@@ -167,6 +167,11 @@ app.put("/purchaseItem", async (req, res) => {
     res.status(500);
   }
 });
+
+app.delete("/delete", async (req, res) => {
+  await knex("items").del()
+  res.send("全消ししたよ")
+})
 
 app.listen(PORT, () => {
   console.log(`I am now waiting for incoming HTTP traffic on port ${PORT}!`);
