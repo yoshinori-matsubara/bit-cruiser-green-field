@@ -10,7 +10,10 @@ app.use(express.json());
 
 app.use((req, res, next) => {
   // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader("Access-Control-Allow-Origin", "https://bitcruiser.onrender.com");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://bitcruiser.onrender.com"
+  );
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
   res.setHeader("Access-Control-Allow-Headers", "*");
   next();
@@ -49,7 +52,7 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
         date.toISOString().split("T")[0],
         req.params.buyingDay
       ) /
-      db[i].consumption_day;
+        db[i].consumption_day;
     // nextBuyingDay時点での在庫数を計算
     const stockOfNextBuyingDay =
       stockOfBuyingDay - diff / db[i].consumption_day;
@@ -106,9 +109,13 @@ app.get("/allItems", async (req, res) => {
     let stockOfBuyingtoDay =
       db[i].item_stock -
       calculateDiffInDays(date.toISOString().split("T")[0], new Date()) /
-      db[i].consumption_day;
+        db[i].consumption_day;
 
-    stockOfBuyingtoDay = Math.ceil(stockOfBuyingtoDay);
+    if (db[i].item_stock >= stockOfBuyingtoDay) {
+      stockOfBuyingtoDay = Math.ceil(stockOfBuyingtoDay);
+    } else {
+      stockOfBuyingtoDay = db[i].item_stock;
+    }
 
     result.push({
       id: db[i].id,
@@ -171,9 +178,9 @@ app.put("/purchaseItem", async (req, res) => {
 });
 
 app.delete("/delete", async (req, res) => {
-  await knex("items").del()
-  res.send("全消ししたよ")
-})
+  await knex("items").del();
+  res.send("全消ししたよ");
+});
 
 app.listen(PORT, () => {
   console.log(`I am now waiting for incoming HTTP traffic on port ${PORT}!`);
