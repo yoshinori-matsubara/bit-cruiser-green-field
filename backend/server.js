@@ -114,7 +114,7 @@ app.get("/allItems", async (req, res) => {
     if (db[i].item_stock >= stockOfBuyingtoDay) {
       stockOfBuyingtoDay = Math.ceil(stockOfBuyingtoDay);
     } else {
-      stockOfBuyingtoDay = db[i].item_stock;
+      stockOfBuyingtoDay = Math.ceil(db[i].item_stock);
     }
 
     result.push({
