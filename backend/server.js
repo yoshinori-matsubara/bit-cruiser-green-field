@@ -52,7 +52,7 @@ app.get("/api/:buyingDay/:nextBuyingDay", async (req, res) => {
         date.toISOString().split("T")[0],
         req.params.buyingDay
       ) /
-        db[i].consumption_day;
+      db[i].consumption_day;
     // nextBuyingDay時点での在庫数を計算
     const stockOfNextBuyingDay =
       stockOfBuyingDay - diff / db[i].consumption_day;
@@ -109,7 +109,7 @@ app.get("/allItems", async (req, res) => {
     let stockOfBuyingtoDay =
       db[i].item_stock -
       calculateDiffInDays(date.toISOString().split("T")[0], new Date()) /
-        db[i].consumption_day;
+      db[i].consumption_day;
 
     if (db[i].item_stock >= stockOfBuyingtoDay) {
       stockOfBuyingtoDay = Math.ceil(stockOfBuyingtoDay);

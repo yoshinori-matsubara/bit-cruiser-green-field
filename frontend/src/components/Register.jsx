@@ -24,7 +24,7 @@ export default function Register(props) {
   }, [props.modalVisible]);
 
   useEffect(() => {
-    console.log(allItem);
+    console.log("itemリスト:", allItem);
   }, [allItem]);
   useEffect(() => {
     console.log(putStock);
