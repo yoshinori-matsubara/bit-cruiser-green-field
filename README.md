@@ -25,10 +25,3 @@ URL：https://bitcruiser.onrender.com/
 ## このアプリについてのご要望
 
 GitHub:yoshinori-matsubara まで！
-
-使用するメソッド：
-GET
-POST
-
-更新履歴：
-2023/05/30 frontend、backend フォルダを作成し、各々 package.json を作成
