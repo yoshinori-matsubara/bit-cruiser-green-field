@@ -20,7 +20,7 @@ URL：https://bitcruiser.onrender.com/
 
 ## 利用技術
 
-![利用方法簡易図](./image/Readme02.png)
+![利用方法簡易図](./image/Readme03.png)
 
 ## このアプリについてのご要望
 
